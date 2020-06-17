@@ -102,3 +102,25 @@ class Temoignage(models.Model):
 
     def __str__(self):
         return str(self.auteur)
+
+
+
+class About(models.Model):
+    
+    image = models.ImageField(upload_to='images/About')
+    title = models.CharField(max_length = 255)
+    description = models.TextField()
+    
+    service_title = models.CharField(max_length = 255)
+    service_description = models.TextField()
+    
+    date_add = models.DateTimeField(auto_now_add=True)
+    date_update = models.DateTimeField(auto_now=True)
+    status = models.BooleanField(default=True)
+
+    class Meta():
+        verbose_name = 'About'
+        verbose_name_plural = 'Abouts'
+
+    def __str__(self):
+        return self.title

@@ -26,18 +26,34 @@ class ServiceAdmin(Action):
 
 
 
+class ProjectTypeAdmin(Action):
+    list_display = ('name', 'date_update', 'status')
+    list_filter = ('name',)
+    search_fields = ('name', )
+    date_hierarchy = 'date_add'
+    list_display_links = ['name']
+    ordering = ['name']
+    list_per_page = 10
+    
+    fieldsets = [
+        ('Info ProjectType', {'fields': ['name']}),
+        ('Standare', {'fields': ['status']})
+    ]
+
+
+
 class ProjectAdmin(Action):
-    list_display = ('titre', 'domaine', 'nouveau_projet', 'date_update',
+    list_display = ('titre', 'type_projet', 'nouveau_projet', 'date_update',
                     'status')
-    list_filter = ('domaine', 'status', 'nouveau_projet')
-    search_fields = ('domaine', )
+    list_filter = ('type_projet', 'status', 'nouveau_projet')
+    search_fields = ('type_projet', )
     date_hierarchy = 'date_add'
     list_display_links = ['titre']
     ordering = ['titre']
     list_per_page = 10
     
     fieldsets = [
-        ('Info Project', {'fields': ['titre', 'domaine', 'nouveau_projet']}),
+        ('Info Project', {'fields': ['titre', 'type_projet', 'nouveau_projet']}),
         ('Standare', {'fields': ['status']})
     ]
 
@@ -65,5 +81,6 @@ def _register(model, admin_class):
 
 
 _register(models.Service, ServiceAdmin)
+_register(models.ProjectType, ProjectTypeAdmin)
 _register(models.Project, ProjectAdmin)
 _register(models.Apartment, ApartmentAdmin)

@@ -83,6 +83,21 @@ class TemoignageAdmin(Action):
 
 
 
+class AboutAdmin(Action):
+    list_display = ('title', 'date_update', 'status')
+    search_fields = ('title', 'service_title')
+    date_hierarchy = 'date_add'
+    list_display_links = ['title']
+    ordering = ['title']
+    
+    fieldsets = [
+        ('Info About', {'fields': ['title', 'description', 'image']}),
+        ('Info Service', {'fields': ['service_title', 'service_description']}),
+        ('Standare', {'fields': ['status']})
+    ]
+
+
+
 def _register(model, admin_class):
     admin.site.register(model, admin_class)
 
@@ -93,5 +108,6 @@ _register(models.SocialAccount, SocialAccountAdmin)
 _register(models.NewsLetter, NewsLetterAdmin)
 _register(models.Contact, ContactAdmin)
 _register(models.Temoignage, TemoignageAdmin)
+_register(models.About, AboutAdmin)
 
 
