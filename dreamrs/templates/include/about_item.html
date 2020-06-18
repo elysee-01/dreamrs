@@ -1,0 +1,40 @@
+{% load static %}
+{% load filtre_perso %}
+
+    <section class="about_part section-padding">
+        <div class="container">
+            <div class="row">
+            <div class="section_tittle">
+                <h2><span>about</span> us</h2>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="about_img">
+                    <img src="{{ about.image.url }}" alt="">
+                </div>
+            </div>
+            <div class="offset-lg-1 col-lg-5 col-sm-8 col-md-6">
+                <div class="about_text">
+                    <h2>{{ about.title|reformate }}</h2>
+                    <p>{{ about.description }}</p>
+                    <a href="#" class="btn_1">learn More</a>
+                    <div class="about_part_counter">
+                        <div class="single_counter">
+                        <span class="counter">100</span>
+                        <p>project</p>
+                        </div>
+                        <div class="single_counter">
+                        <span class="counter">300</span>
+                        <p>clients</p>
+                        </div>
+                        <div class="single_counter">
+                        <span class="counter">150</span>
+                        <p>member</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>

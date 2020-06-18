@@ -67,7 +67,7 @@ class Commentaire(models.Model):
         verbose_name_plural = 'Commentaires'
 
     def __str__(self):
-        return f'{self.auteur} {self.article}'
+        return f'{self.auteur.last_name} {self.article}'
 
 
 class InstagramFeed(models.Model):

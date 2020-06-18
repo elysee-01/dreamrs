@@ -1,0 +1,95 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!--::breadcrumb part start::-->
+<section class="breadcrumb blog_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Search in blog</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--::breadcrumb part start::-->
+
+
+<!--================Search Area =================-->
+<section class="blog_area area-padding">
+    <div class="container">
+        {% if nombre_resultat > 1 %}
+            <h3 class='search_rapport search_rapport_success'>
+                {{ nombre_resultat }} 
+                résultat{{ nombre_resultat|pluralize }} 
+                trouvé{{ nombre_resultat|pluralize }} 
+                pour “{{ q }}”
+            </h3>
+        {% else %}
+            <h3 class='search_rapport search_rapport_null'>
+                Aucun résultat trouvé pour “{{ q }}”
+            </h3>
+        {% endif %}
+        <div class="row">
+            <div class="col-lg-3 mb-4 mb-lg-0"></div>
+
+            <div class="col-lg-6 mb-4 mb-lg-0">
+            <div id="mc_embed_signup">
+                     <form action="{% url 'search' %}" method="POST" id='search_form'>
+                        {% csrf_token %}
+                        <input 
+                           id='search-input'
+                           type="text" 
+                           name="search" 
+                           placeholder="Search Keyword" 
+                           onfocus="this.placeholder=''" 
+                           onblur="this.placeholder=' Search Keyword '" 
+                           required>
+                        <button type="submit" id="search-submit-btn"></button>
+                     </form>
+                  </div>
+                <div class="blog_left_sidebar">
+
+                    {% for article in articles %}
+                        <article class="blog_item">
+                            <div class="blog_item_img">
+                                <img class="card-img rounded-0" src="{{ article.image.url }}" alt="">
+                                <a href="#" class="blog_item_date">
+                                    <h3>{{ article.date_update|date:'d' }}</h3>
+                                    <p>{{ article.date_update|date:'M' }}</p>
+                                </a>
+                            </div>
+
+                            <div class="blog_details">
+                                <a class="d-inline-block" href="{% url 'single' article.id %}">
+                                    <h2>{{ article.titre }}</h2>
+                                </a>
+                                <p>{{ article.description }}</p>
+                                <ul class="blog-info-link">
+                                    <li><a href="#"><i class="far fa-user"></i>{{ article.tag.all|join:', '|title }}</a></li>
+
+                                    <li><a href="#"><i class="far fa-comments"></i>
+                                     {{ article.article_commentaire.all|length }} 
+                                     Comment{{ article.article_commentaire.all|length|pluralize }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </article>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+            <div class="col-lg-3 mb-4 mb-lg-0"></div>
+
+        </div>
+    </div>
+</section>
+<!--================Search Area =================-->
+
+{% endblock %}

@@ -29,25 +29,18 @@
              <div class="row justify-content-center">
                  <div class="col-lg-10">
                     <div class="project_img">
-                        <img src="{% static 'img/gallery/gallery_4.png' %}" alt="">
+                        <img src="{{ apartment_detail.image.url }}" alt="">
                         <div class="project_gallery_hover_text">
                            <p>Home Apartment</p>
-                           <h3>Detached House For Sale </h3>
+                           <h3>{{ apartment_detail.type_apart }}</h3>
                            <ul>
-                              <li><a href=""><span class="flaticon-bath"></span></a> 04</li>
-                              <li><a href=""><span class="flaticon-bed"></span></a> 03</li>
-                              <li><a href=""><span class="flaticon-frame"></span></a> 2400 sqft</li>
+                              <li><a href=""><span class="flaticon-bath"></span></a> {{ apartment_detail.nombre_salle_bain }}</li>
+                              <li><a href=""><span class="flaticon-bed"></span></a> {{ apartment_detail.nombre_chambre }}</li>
+                              <li><a href=""><span class="flaticon-frame"></span></a> {{ apartment_detail.nombre_fenetre }} sqft</li>
                               <li><a href=""><span class="ti-heart"></span></a> like</li>
                            </ul>
                         </div>
-                        <p>Justo curabitur metus sit ac suspendisse ad Fringilla diam sem. Tellus,
-                             purus dolor praesent, vitae ac est natoque nibh primis quam parturient 
-                             facilisis viverra netus magna et cursus ornare, sit. Donec nisl dignissim 
-                             lobortis senectus dictum nullam mi et  auctor lectus nisi.</p>
-
-                        <p>Tempor tellus. Tristique class morbi dapibus habitasse eget eget varius 
-                            curabitur lacinia curae; maecenas feugiat molestie odio vivamus mollis
-                             tincidunt dictumst donec nam semper lacinia platea bibendum ligula vel ante.</p>
+                        {{ apartment_detail.description|linebreaks }}
                      </div>
                  </div>
              </div>

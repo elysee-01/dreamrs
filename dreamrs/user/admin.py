@@ -12,10 +12,10 @@ class ProfileAdmin(UserAdmin):
     list_display_links = UserAdmin.list_display_links + ('username', 'email')
 
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('photo', 'adresse')}),
+        (None, {'fields': ('photo', 'adresse', 'website', 'description')}),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
-        (None, {'fields': ('photo', 'adresse')}),
+        (None, {'fields': ('photo', 'adresse', 'website', 'description')}),
     )
 
     def images_view(self, obj):

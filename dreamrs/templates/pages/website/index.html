@@ -24,46 +24,7 @@
    <!--::banner part end::-->
 
    <!--::team part end::-->
-   <section class="about_part section-padding">
-      <div class="container">
-         <div class="row">
-            <div class="section_tittle">
-               <h2><span>about</span> us</h2>
-            </div>
-         </div>
-         <div class="row">
-            <div class="col-lg-6 col-md-6">
-               <div class="about_img">
-                  <img src="{% static 'img/about.png' %}" alt="">
-               </div>
-            </div>
-            <div class="offset-lg-1 col-lg-5 col-sm-8 col-md-6">
-               <div class="about_text">
-                  <h2>Hello City We are
-                     leader in <span>proparties.</span></h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ips
-                     eiusmod tempor incididunt ut labore et dolore magna aliqua isuspendisse
-                     ultrices gravida. Risus. </p>
-                  <a href="#" class="btn_1">learn More</a>
-                  <div class="about_part_counter">
-                     <div class="single_counter">
-                        <span class="counter">100</span>
-                        <p>project</p>
-                     </div>
-                     <div class="single_counter">
-                        <span class="counter">300</span>
-                        <p>clients</p>
-                     </div>
-                     <div class="single_counter">
-                        <span class="counter">150</span>
-                        <p>member</p>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
+   {% include "include/about_item.html" %}
    <!--::team part end::-->
 
    <!--::project part start::-->
@@ -89,54 +50,48 @@
             </div>
          </div>
          <div class="row">
-            <div class="col-lg-7">
-               <div class="single_blog">
-                  <div class="appartment_img">
-                     <img src="{% static 'img/blog_1.png' %}" alt="">
-                  </div>
-                  <div class="single_appartment_content">
-                     <p><a href="#">Apartment</a> / March 20, 2019</p>
-                     <a href="{% url 'blog' %}">
-                        <h4>Doee lights without darkness that said
-                           good deep years very.</h4>
-                     </a>
-                     <ul class="list-unstyled">
-                        <li><a href=""> <span class="ti-comment"></span> </a> 2 comment</li>
-                        <li><a href=""> <span class="ti-heart"></span> </a> 0 like</li>
-                     </ul>
+
+            {% for recent_apart_article in recent_apart_articles|slice:':1' %}
+               <div class="col-lg-7">
+                  <div class="single_blog">
+                     <div class="appartment_img">
+                        <img src="{{ recent_apart_article.image.url }}" alt="">
+                     </div>
+                     <div class="single_appartment_content">
+                        <p><a href="#">{{ recent_apart_article.cathegorie.nom|upper }}</a> / {{ recent_apart_article.date_update|date:'F d, Y'|title }}</p>
+                        <a href="{% url 'blog' %}">
+                           <h4>{{ recent_apart_article.titre }}</h4>
+                        </a>
+                        <ul class="list-unstyled">
+                           <li><a href=""> <span class="ti-comment"></span> </a> {{ recent_apart_article.article_commentaire.all|length }}
+                            comment{{ recent_apart_article.article_commentaire.all|length|pluralize }}</li>
+                           <li><a href=""> <span class="ti-heart"></span> </a> 0 like</li>
+                        </ul>
+                     </div>
                   </div>
                </div>
-            </div>
+            {% endfor %}
+
             <div class="col-lg-5">
                <div class="right_single_blog">
-                  <div class="single_blog">
-                     <div class="media">
-                        <div class="media-body align-self-center">
-                           <p><a href="#">Apartment</a> / March 20, 2019</p>
-                           <a href="{% url 'blog' %}">
-                              <h5 class="mt-0"> lights without darkness that said.</h5>
-                           </a>
-                           <ul class="list-unstyled">
-                              <li><a href=""> <span class="ti-time"></span> </a> Mar 12</li>
-                              <li><a href=""> <span class="ti-heart"></span> </a> 0 like</li>
-                           </ul>
+
+                  {% for recent_apart_article in recent_apart_articles|slice:'1:' %}
+                     <div class="single_blog">
+                        <div class="media">
+                           <div class="media-body align-self-center">
+                              <p><a href="#">{{ recent_apart_article.cathegorie.nom|upper }}</a> / {{ recent_apart_article.date_update|date:'F d, Y'|title }}</p>
+                              <a href="{% url 'single' recent_apart_article.id %}">
+                                 <h5 class="mt-0">{{ recent_apart_article.titre }}</h5>
+                              </a>
+                              <ul class="list-unstyled">
+                                 <li><a href=""> <span class="ti-time"></span> </a>{{ recent_apart_article.date_update|date:'l d'|title }}</li>
+                                 <li><a href=""> <span class="ti-heart"></span> </a> 0 like</li>
+                              </ul>
+                           </div>
                         </div>
                      </div>
-                  </div>
-                  <div class="single_blog">
-                     <div class="media">
-                        <div class="media-body align-self-center">
-                           <p><a href="#">Apartment</a> / March 20, 2019</p>
-                           <a href="{% url 'blog' %}">
-                              <h5 class="mt-0"> lights without darkness that said.</h5>
-                           </a>
-                           <ul class="list-unstyled">
-                              <li><a href=""> <span class="ti-time"></span> </a> Mar 12</li>
-                              <li><a href=""> <span class="ti-heart"></span> </a> 0 like</li>
-                           </ul>
-                        </div>
-                     </div>
-                  </div>
+                  {% endfor %}
+
                </div>
             </div>
          </div>

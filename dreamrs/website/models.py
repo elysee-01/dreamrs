@@ -28,10 +28,10 @@ class SiteInfo(models.Model):
 
 class SocialAccount(models.Model):
     ICONS = [
-        ("ti-facebook", "Facebook"),
-        ("fa-twitter", "Twitter"),
-        ("fa-google-plus", "Google +"),
-        ("fa-linkedin", "Linkedin"),
+        ("fab fa-facebook-f", "Facebook"),
+        ("fab fa-twitter", "Twitter"),
+        ("fas fa-globe", "Globe"),
+        ("fab fa-behance", "Behance"),
     ]
 
     nom = models.CharField(max_length=255)
@@ -88,9 +88,11 @@ class Contact(models.Model):
 
 
 class Temoignage(models.Model):
-    auteur = models.ForeignKey(AUTH_USER_MODEL, related_name='auteur_temoignage', on_delete=models.CASCADE)
+    nom = models.CharField(max_length = 255, null=True)
+    prenom = models.CharField(max_length = 255, null=True)
     message = models.TextField()
     metier = models.CharField(max_length = 150)
+    photo = models.ImageField(upload_to='images/Temoignage', null=True)
     
     date_add = models.DateTimeField(auto_now_add=True)
     date_update = models.DateTimeField(auto_now=True)
@@ -101,7 +103,7 @@ class Temoignage(models.Model):
         verbose_name_plural = 'Temoignages'
 
     def __str__(self):
-        return str(self.auteur)
+        return f'{self.prenom} {self.nom}'
 
 
 

@@ -5,7 +5,7 @@ from django.db import models
 class Service(models.Model):
     nom = models.CharField(max_length = 255)
     description = models.TextField()
-    image = models.ImageField(upload_to='images/Service')
+    image = models.ImageField(upload_to='images/Service', blank=True)
 
     date_add = models.DateTimeField(auto_now_add=True)
     date_update = models.DateTimeField(auto_now=True)
@@ -32,13 +32,13 @@ class ProjectType(models.Model):
         verbose_name_plural = 'Projects types'
 
     def __str__(self):
-        self.name
+        return self.name
 
 
 
 class Project(models.Model):
     type_projet = models.ForeignKey(ProjectType, on_delete=models.CASCADE, related_name='project_type')
-    
+    image = models.ImageField(upload_to='images')
     titre = models.CharField(max_length = 255)
     nouveau_projet = models.BooleanField(default=True)
     
@@ -51,11 +51,12 @@ class Project(models.Model):
         verbose_name_plural = 'Projects'
 
     def __str__(self):
-        self.titre
+        return self.titre
 
 
 class Apartment(models.Model):
     type_apart = models.CharField(max_length = 150)
+    image = models.ImageField(upload_to='images/Apartment')
     description = models.TextField()
     nombre_salle_bain = models.PositiveIntegerField()
     nombre_chambre = models.PositiveIntegerField()

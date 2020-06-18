@@ -10,7 +10,7 @@ from actions.action import Action
 
 class ServiceAdmin(Action):
     list_display = ('nom', 'date_add', 'date_update',
-                    'status', 'images_view')
+                    'status',)
     list_filter = ('status', )
     search_fields = ('nom', )
     date_hierarchy = 'date_add'
@@ -53,7 +53,7 @@ class ProjectAdmin(Action):
     list_per_page = 10
     
     fieldsets = [
-        ('Info Project', {'fields': ['titre', 'type_projet', 'nouveau_projet']}),
+        ('Info Project', {'fields': ['titre', 'type_projet', 'nouveau_projet', 'image']}),
         ('Standare', {'fields': ['status']})
     ]
 
@@ -61,7 +61,7 @@ class ProjectAdmin(Action):
 
 class ApartmentAdmin(Action):
     list_display = ('type_apart', 'nombre_salle_bain', 'nombre_chambre', 
-                    'date_update', 'nombre_fenetre', 'status')
+                    'date_update', 'nombre_fenetre', 'status', 'images_view')
     list_filter = ('type_apart', )
     search_fields = ('type_apart', 'nombre_salle_bain', 'nombre_chambre', 'nombre_fenetre')
     date_hierarchy = 'date_add'
@@ -70,9 +70,13 @@ class ApartmentAdmin(Action):
     list_per_page = 10
     
     fieldsets = [
-        ('Info Project', {'fields': ['type_apart', 'nombre_salle_bain', 'nombre_chambre', 'nombre_fenetre', 'description']}),
+        ('Info Project', {'fields': ['type_apart', 'image', 'nombre_salle_bain', 'nombre_chambre', 'nombre_fenetre', 'description']}),
         ('Standare', {'fields': ['status']})
     ]
+    
+    def images_view(self, obj):
+        return mark_safe('<img src="{url}" style="height:50px; width:100px">'.format(url=obj.image.url))
+
 
 
 

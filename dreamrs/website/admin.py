@@ -70,16 +70,20 @@ class ContactAdmin(Action):
 
 
 class TemoignageAdmin(Action):
-    list_display = ('auteur', 'metier', 'date_update', 'status')
-    search_fields = ('auteur', 'metier', 'message')
+    list_display = ('nom', 'prenom', 'metier', 'date_update', 'status', 'photo_view')
+    search_fields = ('nom', 'prenom', 'metier')
     date_hierarchy = 'date_add'
-    list_display_links = ['auteur', 'metier']
-    ordering = ['auteur', 'metier']
+    list_display_links = ['nom', 'prenom', 'metier']
+    ordering = ['nom', 'prenom', 'metier']
     
     fieldsets = [
-        ('Info Temoignage', {'fields': ['auteur', 'metier', 'message']}),
+        ('Info Temoignage', {'fields': ['nom', 'prenom', 'metier', 'photo', 'message']}),
         ('Standare', {'fields': ['status']})
     ]
+
+    def photo_view(self, obj):
+        return mark_safe(f'<img src="{obj.photo.url}" style="height:50px; width:50px">')
+
 
 
 
