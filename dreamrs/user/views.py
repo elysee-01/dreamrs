@@ -1,12 +1,35 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+
 # Create your views here.
 
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 
 
-def login_page(request):
 
+def register_view(request):
+    
+    if request.method == 'POST':
+        form = RegisterForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            return redirect('login')
+    else:
+        form = RegisterForm()
+    
+    data = {
+        'form': form
+    }
+    
+    return render(request, 'pages/user/register.html', data)
+
+
+
+def login_view(request):
+    
     if request.user.is_authenticated:
         return redirect('home')
 
@@ -28,6 +51,6 @@ def login_page(request):
 
 
 
-def logout_page(request):
+def logout_view(request):
     logout(request)
     return redirect('login')

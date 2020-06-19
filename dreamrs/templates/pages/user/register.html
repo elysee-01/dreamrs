@@ -8,7 +8,7 @@
             <div class="col-lg-12">
                 <div class="breadcrumb_iner">
                     <div class="breadcrumb_iner_item">
-                        <h2>Connexion</h2>
+                        <h2>Inscription</h2>
                     </div>
                 </div>
             </div>
@@ -17,19 +17,25 @@
 </section>
 <!--::breadcrumb part start::-->
 
-<form method="POST" id="form-foruser">
+<form method="POST" id="form-foruser" enctype="multipart/form-data" class="form-foruser-2">
     {% csrf_token %}
     <div class="form-h">
-        Sign In
+        Register
+        <br><br>
+        <div class="profile">
+            <img src="" id="apercu" alt='apercu du profile'>
+        </div>
     </div>
+    <br>
     <div class="form-body">
-        {{ form.username }}
-        {{ form.password }}
-        <input type="submit" value="Sign in">
+        {% for input in form %}
+            {{ input }}
+        {% endfor %}
+        <input type="submit" value="Sign up">
     </div>
     <div class="form-f">
-        <p>Don’t have an account?</p>
-        <a href="{% url 'register' %}">SIGN UP NOW</a>
+        <p>You have an account?</p>
+        <a href="{% url 'login' %}">SIGN IN NOW</a>
     </div>
 </form>
 

@@ -38,7 +38,8 @@
   padding: 5px;
 }
 
-.form-body input {
+.form-body input,
+.form-body textarea {
   margin-bottom: 30px;
   padding: 15px;
   width: 100%;
@@ -52,21 +53,33 @@
   background-color: #f0f0f0;
 }
 
-input::placeholder {
+input::placeholder,
+textarea::placeholder {
   color: black;
   font-size: 14px;
+  text-transform: uppercase;
+}
+
+textarea::placeholder {
+  text-align: center;
+}
+
+textarea {
+  border-radius: 30px;
 }
 
 .form-body .width-2 {
   width: 49%;
 }
 
-.form-body input:not(.btn-s):focus {
+.form-body input:not(.btn-s):focus,
+.form-body textarea:focus {
   background-color: var(--bgc) !important;
   color: #fff;
 }
 
-.form-body input:not(.btn-s):focus::placeholder {
+.form-body input:not(.btn-s):focus::placeholder,
+.form-body textarea:focus::placeholder {
   color: #fff;
 }
 
@@ -121,4 +134,23 @@ input::placeholder {
 .form-f a:hover {
   color: #444;
   transition: 0.4s;
+}
+
+.profile {
+  width: 100px;
+  height: 100px;
+  bottom: -40px;
+  overflow: hidden;
+  position: absolute;
+  border-radius: 50%;
+  background-color: #fff;
+  left: calc(50% - 50px);
+  border: 5px solid #888;
+}
+
+.profile img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #fff;
 }
