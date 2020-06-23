@@ -8,9 +8,9 @@ from django.db.models import Q
 
 
 def blog(request, filtre=None, filtre_id=None):
-    
+
     articles = Article.objects.filter(status=True).order_by('-date_update')
-    
+
     if filtre == 'tag':
         articles_all = articles.filter(tag=filtre_id)
     elif filtre == 'cath':
@@ -42,40 +42,42 @@ def blog(request, filtre=None, filtre_id=None):
         'instagrams': instagrams,
         'cathegories': cathegories,
     }
-    
+
     return render(request, 'pages/blog/blog.html', data)
 
 
 
 def single(request, article_id):
-    
+
     article = get_object_or_404(Article, status=True, pk=article_id)
     articles_recent = Article.objects.filter(status=True).order_by('-date_update')[:4]
     tags = Tag.objects.filter(status=True)
     commentaires = Commentaire.objects.filter(status=True)
     instagrams = InstagramFeed.objects.filter(status=True)
     cathegories = CathegorieArticle.objects.filter(status=True)
-    
+
     if request.method == 'POST' and request.POST['comment']:
         if request.user.is_authenticated:
             new_comment = Commentaire.objects.create(
-                commentaire=request.POST['comment'], 
+                commentaire=request.POST['comment'],
                 auteur=request.user,
                 article=article
             )
             new_comment.save()
         else:
             return redirect('login')
-    
+
     data = {
         'l_article': article,
+        'next_article': article.get_previous_by_date_update,
+        'prev_article': article.get_next_by_date_update,
         'articles_recent': articles_recent,
         'tags': tags,
         'commentaires': commentaires,
         'instagrams': instagrams,
         'cathegories': cathegories,
     }
-    
+
     return render(request, 'pages/blog/single-blog.html', data)
 
 
@@ -96,5 +98,5 @@ def search(request):
         'articles': articles,
         'nombre_resultat': len(articles),
     }
-    
+
     return render(request, 'pages/blog/blog_search.html', data)

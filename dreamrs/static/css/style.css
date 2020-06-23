@@ -5399,6 +5399,8 @@ h6 {
 .single-post-area .navigation-area .nav-left .thumb img {
   -webkit-transition: 0.5s;
   transition: 0.5s;
+  width: 80px;
+  height: 65px;
 }
 
 /* line 1116, ../../01 cl html template/New folder/May 2019/178 Real Estate/Real Estate Html/sass/_blog.scss */
@@ -5441,6 +5443,8 @@ h6 {
 .single-post-area .navigation-area .nav-right .thumb img {
   -webkit-transition: 0.5s;
   transition: 0.5s;
+  width: 80px;
+  height: 65px;
 }
 
 /* line 1144, ../../01 cl html template/New folder/May 2019/178 Real Estate/Real Estate Html/sass/_blog.scss */
